@@ -236,7 +236,7 @@
             padding: 24px 24px calc(30px + env(safe-area-inset-bottom)) 24px;
             transform: translateY(100%);
             transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 1001;
+            z-index: 1010;
             max-height: 85vh;
             overflow-y: auto;
             box-shadow: 0 -10px 40px rgba(255, 255, 255, 0.02);
@@ -379,7 +379,7 @@
             cursor: pointer;
         }
 
-        /* Полноэкранное окно Соглашения (Оферта + 152-ФЗ) */
+        /* Полноэкранное окно Соглашения */
         .offer-modal {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -463,7 +463,6 @@
                     </svg>
                     <span>All of Naive</span>
                 </div>
-                
                 <ul class="features-list">
                     <li>
                         <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM12 6C13.66 6 15 7.34 15 9C15 10.66 13.66 12 12 12C10.34 12 9 10.66 9 9C9 7.34 10.34 6 12 6ZM18 18H6V16.5C6 14.5 10 13.4 12 13.4C14 13.4 18 14.5 18 16.5V18Z" fill="#ffffff" opacity="0.9"/></svg>
@@ -478,37 +477,23 @@
                         <div class="feature-text-cell"><strong>Разбор тайтлов</strong> — Уникальные стили и проекты.</div>
                     </li>
                     <li>
-                        <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 3H3C1.9 3 1 3.9 1 4.9V19C1 20.1 1.9 21 3 21H21C22.1 21 23 20.1 23 19V4.9C23 3.9 22.1 3 21 3ZM21 17H3V7H21V17Z" fill="#ffffff" opacity="0.9"/></svg>
-                        <div class="feature-text-cell"><strong>Моушен сцены</strong> — Детальный воркшоп.</div>
-                    </li>
-                    <li>
                         <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z" fill="#ffffff" opacity="0.9"/></svg>
                         <div class="feature-text-cell"><strong>Разбор нейронок</strong> — Интеграция ИИ в монтаж.</div>
                     </li>
-                    <li>
-                        <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" fill="#ffffff" opacity="0.9"/></svg>
-                        <div class="feature-text-cell"><strong>Пак звука / футажей / CRT</strong> — Приватный авторский пак.</div>
-                    </li>
-                    <li>
-                        <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z" fill="#ffffff" opacity="0.9"/></svg>
-                        <div class="feature-text-cell"><strong>Комьюнити</strong> — Закрытый чат и личный Discord.</div>
-                    </li>
                 </ul>
-
                 <button class="btn-primary" onclick="toggleDrawer(true)">
-                    <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 7H16V6C16 4.34 14.66 3 13 3H11C9.34 3 8 4.34 8 6V7H5C3.9 7 3 7.9 3 9V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V9C21 7.9 20.1 7 19 7ZM10 6C10 5.45 10.45 5 11 5H13C13.55 5 14 5.45 14 6V7H10V6Z" fill="#000000"/></svg>
-                    <span>Приобрести подписку</span>
+                    <span>Получить доступ</span>
                 </button>
             </div>
         </div>
 
         <div id="page-profile" class="page">
             <div class="profile-box">
-                <div class="avatar-container" id="user-avatar">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5-4-8-4z" fill="#ffffff" opacity="0.3"/></svg>
+                <div class="avatar-container">
+                    <img id="user-avatar" src="https://placehold.co/100x100/222/fff?text=Photo" alt="Аватар">
                 </div>
-                <div class="user-name" id="user-name">Загрузка...</div>
-                <div id="sub-status-box" class="sub-status inactive">Проверка подписки...</div>
+                <div class="user-name" id="user-display-name">Пользователь</div>
+                <div id="sub-badge" class="sub-status inactive">Загрузка статуса...</div>
             </div>
         </div>
     </div>
@@ -516,83 +501,85 @@
     <div class="drawer-overlay" id="drawer-overlay" onclick="if(event.target===this) toggleDrawer(false)">
         <div class="drawer">
             <div class="drawer-header">
-                <span class="drawer-title">Выберите период подписки</span>
+                <div class="drawer-title">Выбор периода доступа</div>
                 <button class="drawer-close" onclick="toggleDrawer(false)">&times;</button>
             </div>
 
-            <input type="text" id="promo-code" class="promo-input" placeholder="Промокод">
+            <input type="text" id="promo-code" class="promo-input" placeholder="Введите промокод (если есть)" autocomplete="off">
 
             <div class="tariff-options">
                 <div class="tariff-card selected" onclick="selectTariff(this, '1_month', 2790)">
                     <div class="tariff-info">
-                        <span class="tariff-name">1 месяц</span>
-                        <span class="tariff-desc">Быстрый доступ к материалам</span>
+                        <div class="tariff-name">1 месяц</div>
+                        <div class="tariff-desc">Базовый доступ к материалам</div>
                     </div>
-                    <span class="tariff-price">2 790 ₽</span>
+                    <div class="tariff-price">2 790 ₽</div>
                 </div>
                 <div class="tariff-card" onclick="selectTariff(this, '3_months', 6990)">
                     <div class="tariff-info">
-                        <span class="tariff-name">3 месяца</span>
-                        <span class="tariff-desc">Оптимально для закрепления базы</span>
+                        <div class="tariff-name">3 месяца</div>
+                        <div class="tariff-desc">Оптимальный период обучения</div>
                     </div>
-                    <span class="tariff-price">6 990 ₽</span>
+                    <div class="tariff-price">6 990 ₽</div>
                 </div>
                 <div class="tariff-card" onclick="selectTariff(this, '6_months', 11990)">
                     <div class="tariff-info">
-                        <span class="tariff-name">6 месяцев</span>
-                        <span class="tariff-desc">Максимальный упор на практику</span>
+                        <div class="tariff-name">6 месяцев</div>
+                        <div class="tariff-desc">Полное погружение в моушен</div>
                     </div>
-                    <span class="tariff-price">11 990 ₽</span>
+                    <div class="tariff-price">11 990 ₽</div>
                 </div>
                 <div class="tariff-card" onclick="selectTariff(this, 'forever', 14990)">
                     <div class="tariff-info">
-                        <span class="tariff-name">Навсегда</span>
-                        <span class="tariff-desc">Пожизненный доступ ко всем апдейтам</span>
+                        <div class="tariff-name">Навсегда</div>
+                        <div class="tariff-desc">Безлимитный доступ навсегда</div>
                     </div>
-                    <span class="tariff-price">14 990 ₽</span>
+                    <div class="tariff-price">14 990 ₽</div>
                 </div>
             </div>
 
             <div class="pay-methods">
-                <button class="btn-pay yoomoney" onclick="processPayment('yoomoney')">ЮMoney</button>
-                <button class="btn-pay cryptobot" onclick="processPayment('crypto')">Crypto Bot</button>
+                <button class="btn-pay yoomoney" onclick="processPayment('yoomoney')">
+                    <span>Карты / СБП</span>
+                </button>
+                <button class="btn-pay cryptobot" onclick="processPayment('crypto')">
+                    <span>Крипта</span>
+                </button>
             </div>
 
             <div class="legal-notice">
-                Совершая оплату, вы безоговорочно принимаете условия <span class="legal-link" onclick="openOffer()">Пользовательского соглашения и Политики конфиденциальности</span>.
+                Нажимая кнопку оплаты, вы принимаете условия <span class="legal-link" onclick="openOffer()">Публичной оферты</span> и даете согласие на обработку персональных данных.
             </div>
         </div>
     </div>
 
     <div class="offer-modal" id="offer-modal">
         <div class="offer-content">
-            <h2>ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ</h2>
-            <p><strong>Редакция от: Май 2026 г.</strong></p>
-            <p>Настоящий документ объединяет в себе Публичную оферту на предоставление доступа к цифровому контенту и Политику конфиденциальности в соответствии с требованиями Федерального закона РФ № 152-ФЗ «О персональных данных».</p>
-            
-            <h3>ЧАСТЬ 1. ПУБЛИЧНАЯ ОФЕРТА</h3>
-            <p><strong>1. Предмет договора:</strong> Исполнитель предоставляет Пользователю платный доступ к закрытым информационно-обучающим материалам по видеомонтажу (видеоуроки, исходники, авторские паки звуков/эффектов) через Telegram Mini App.</p>
-            <p><strong>2. Порядок предоставления и отсутствие возвратов:</strong> Весь цифровой контент и учебные проекты предоставляются Пользователю в состоянии <strong>«КАК ЕСТЬ» (As is)</strong>. Доступ открывается мгновенно в автоматическом режиме сразу после подтверждения успешного платежа через шлюз ЮKassa или Crypto Bot.</p>
-            <p>В силу того, что продукт является непериодическим цифровым изданием, доступ к которому предоставляется в полном объеме сразу, <strong>ВОЗВРАТ ДЕНЕЖНЫХ СРЕДСТВ ПОСЛЕ ОПЛАТЫ НЕ ПРОИЗВОДИТСЯ</strong>. Отсутствие ожидаемого Пользователем субъективного результата не является основанием для возврата.</p>
-            
-            <h3>ЧАСТЬ 2. ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ (152-ФЗ)</h3>
-            <p><strong>1. Какие данные обрабатываются:</strong> При использовании настоящего приложения Исполнитель получает доступ к публичным техническим данным профиля Telegram Пользователя: уникальный Telegram ID, Имя, Фамилия, а также URL-ссылка на аватар профиля.</p>
-            <p><strong>2. Цель обработки данных:</strong> Персональные данные обрабатываются исключительно в целях идентификации Пользователя в системе, привязки приобретенного тарифного плана к его аккаунту и автоматической проверки срока действия активной подписки.</p>
-            <p><strong>3. Защита и передача третьим лицам:</strong> Исполнитель обязуется не передавать данные Пользователя третьим лицам, за исключением случаев автоматической передачи зашифрованных платежных логов на стороне серверов ЮKassa/Crypto Bot для процессинга транзакции. Данные хранятся в защищенной базе данных и удаляются по первому требованию Пользователя при обращении в поддержку.</p>
+            <h2>Публичная оферта</h2>
+            <p><strong>Пользовательское соглашение и условия предоставления услуг.</strong></p>
+            <h3>1. Общие положения</h3>
+            <p>Настоящий документ является официальным предложением (публичной офертой) ИП Дмитрий / All of Naive и содержит все существенные условия по предоставлению доступа к закрытому информационному Telegram-сообществу и обучающим материалам.</p>
+            <h3>2. Предмет оферты</h3>
+            <p>Исполнитель обязуется предоставить Цифровой доступ к медиаматериалам платформы All of Naive на выбранный Заказчиком период, а Заказчик обязуется оплатить услуги согласно действующим тарифам.</p>
+            <h3>3. Условия оплаты и доставка товара</h3>
+            <p>Оплата производится в полном объеме через интегрированные платежные шлюзы (ЮKassa, CryptoBot). Ссылка-инвайт на закрытый ресурс генерируется автоматически чат-ботом сразу после верификации успешной транзакции.</p>
+            <h3>4. Политика возврата</h3>
+            <p>В связи с тем, что предоставляемая услуга заключается в предоставлении мгновенного цифрового доступа к контенту, возврат денежных средств после получения ссылки на вступление в группу не производится.</p>
         </div>
-        <button class="btn-primary" onclick="closeOffer()" style="margin-top: 0;">Понятно, закрыть</button>
+        <button class="btn-primary" onclick="closeOffer()">Вернуться назад</button>
     </div>
 
     <div class="tabbar">
         <button class="tab-item active" onclick="switchPage('courses', this)">
-            <svg class="sticker-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="#8e8e93"/>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 3L1 9L12 15L21 10V17H23V9L12 3Z" fill="#8e8e93"/>
+                <path d="M19 13.73V12.33L12 16.21L5 12.33V13.73L12 17.62L19 13.73Z" fill="#8e8e93"/>
             </svg>
-            <span>Подписка</span>
+            <span>Обучение</span>
         </button>
         <button class="tab-item" onclick="switchPage('profile', this)">
-            <svg class="sticker-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" fill="#8e8e93"/>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="#8e8e93"/>
             </svg>
             <span>Профиль</span>
         </button>
@@ -606,28 +593,29 @@
         let selectedTariffId = '1_month';
         let selectedTariffPrice = 2790;
 
+        // Инициализация данных пользователя из Telegram
         if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
             const user = tg.initDataUnsafe.user;
-            document.getElementById('user-name').innerText = (user.first_name + ' ' + (user.last_name || '')).trim();
+            document.getElementById('user-display-name').innerText = user.first_name + (user.last_name ? ' ' + user.last_name : '');
             if (user.photo_url) {
-                document.getElementById('user-avatar').innerHTML = `<img src="${user.photo_url}" alt="Avatar">`;
+                document.getElementById('user-avatar').src = user.photo_url;
             }
         }
 
+        // Парсинг статуса подписки из URL-адреса, переданного ботом
         function checkSubscriptionStatus() {
-            const statusBox = document.getElementById('sub-status-box');
             const urlParams = new URLSearchParams(window.location.search);
             const subUntil = urlParams.get('sub_until');
-
-            if (subUntil && subUntil !== 'none' && subUntil !== '0') {
-                statusBox.className = "sub-status active";
-                statusBox.innerHTML = `Активна до:<br><strong>${subUntil}</strong>`;
+            const badge = document.getElementById('sub-badge');
+            
+            if (subUntil && subUntil !== 'none') {
+                badge.className = "sub-status active";
+                badge.innerHTML = `Активна до: <b>${subUntil}</b>`;
             } else {
-                statusBox.className = "sub-status inactive";
-                statusBox.innerHTML = "У вас нет активной подписки";
+                badge.className = "sub-status inactive";
+                badge.innerText = "Подписка не активна";
             }
         }
-        
         checkSubscriptionStatus();
 
         function switchPage(pageId, button) {
