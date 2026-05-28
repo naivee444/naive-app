@@ -2,91 +2,314 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>All of Naive</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
+        /* Стиль iOS 18 / Премиальный темный дизайн */
+        :root {
+            --bg-glow: radial-gradient(circle at 50% -20%, rgba(255, 51, 51, 0.15), transparent 80%),
+                       radial-gradient(circle at 0% 100%, rgba(103, 58, 183, 0.12), transparent 50%);
+            --glass-bg: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --active-glow: 0 0 20px rgba(255, 51, 51, 0.3);
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #0d0d0d;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #000000;
+            background-image: var(--bg-glow);
+            background-attachment: fixed;
             color: #ffffff;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            overflow-x: hidden;
+            -webkit-user-select: none;
         }
+
         .container {
-            padding: 15px;
-            padding-bottom: 80px;
+            padding: 16px;
+            padding-bottom: 100px;
+            animation: fadeIn 0.6s ease-out;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Баннер проекта */
         .banner {
             width: 100%;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.1);
+            border-radius: 16px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
         }
-        .card {
-            background: #1a1a1a;
-            border: 1px solid #2d2d2d;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
+
+        /* Эффект водяного матового стекла */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
-        h2 { margin-top: 0; color: #e5e5e5; font-size: 20px; }
-        .price { font-size: 22px; font-weight: bold; color: #ff3333; margin: 15px 0; }
-        .btn {
-            background: #ffffff;
-            color: #000000;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            width: 100%;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
+
+        h2 {
+            margin-top: 0;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .btn:active { transform: scale(0.98); }
+
+        .sub-title {
+            color: #888888;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        /* Стили списка курсов под кастомные стикеры */
         .list-item {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 10px;
-            font-size: 14px;
-            line-height: 1.4;
+            margin-bottom: 14px;
+            font-size: 14.5px;
+            line-height: 1.45;
+            color: #e1e1e1;
         }
-        .list-item span { margin-right: 10px; color: #ff3333; }
-        
-        /* Таббар (Нижнее меню) */
+
+        .list-item .icon {
+            font-size: 20px;
+            margin-right: 12px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .price-tag {
+            font-size: 26px;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 20px 0 10px 0;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .price-tag span {
+            font-size: 14px;
+            color: #888;
+            font-weight: 400;
+            margin-left: 5px;
+        }
+
+        /* Глянцевые кнопки в стиле iOS */
+        .btn-primary {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 14px;
+            border-radius: 14px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.97);
+            background: #e5e5e5;
+        }
+
+        /* Нижнее меню (Таббар) как на скрине Crypto Bot */
         .tab-bar {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #111111;
-            border-top: 1px solid #222222;
+            bottom: 12px;
+            left: 12px;
+            right: 12px;
+            background: rgba(15, 15, 15, 0.75);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
             display: flex;
             justify-content: space-around;
-            padding: 10px 0;
+            padding: 8px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 999;
         }
+
         .tab-item {
-            color: #888888;
-            font-size: 12px;
+            color: #777777;
+            font-size: 11px;
+            font-weight: 500;
             text-align: center;
             cursor: pointer;
             flex: 1;
+            transition: color 0.3s ease;
         }
-        .tab-item.active { color: #ffffff; font-weight: bold; }
-        .tab-icon { font-size: 20px; margin-bottom: 3px; }
-        
+
+        .tab-item.active {
+            color: #ffffff;
+        }
+
+        .tab-icon {
+            font-size: 22px;
+            margin-bottom: 2px;
+            transition: transform 0.2s ease;
+        }
+
+        .tab-item:active .tab-icon {
+            transform: scale(0.85);
+        }
+
         .page { display: none; }
         .page.active { display: block; }
 
-        .profile-box {
-            background: #141414;
-            border-left: 4px solid #ff3333;
+        /* Выезжающая шторка тарифов (iOS Bottom Sheet) */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            display: none;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .bottom-sheet {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: rgba(20, 20, 20, 0.85);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 28px 28px 0 0;
+            padding: 24px;
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 1001;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active { display: block; opacity: 1; }
+        .bottom-sheet.active { transform: translateY(0); }
+
+        .sheet-handle {
+            width: 36px; height: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            margin: -12px auto 20px auto;
+        }
+
+        /* Сетки выбора тарифов */
+        .tariff-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .tariff-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tariff-card.selected {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #ffffff;
+            box-shadow: var(--active-glow);
+        }
+
+        .tariff-title { font-size: 14px; color: #aaa; margin-bottom: 6px; }
+        .tariff-price { font-size: 18px; font-weight: 700; }
+
+        /* Поле Промокода */
+        .promo-container {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .promo-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
             padding: 12px;
-            border-radius: 0 8px 8px 0;
-            font-family: monospace;
-            margin-bottom: 15px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            text-transform: uppercase;
+        }
+
+        .btn-promo {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border: none;
+            padding: 0 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Кнопки платежек */
+        .pay-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-pay {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px;
+            border-radius: 14px;
+            border: none;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn-yk { background: #673ab7; color: white; }
+        .btn-cb { background: #229ed9; color: white; }
+        .btn-pay:active { opacity: 0.8; }
+
+        /* Личный кабинет */
+        .profile-box {
+            background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+            border-left: 4px solid #ffffff;
+            padding: 16px;
+            border-radius: 4px 16px 16px 4px;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+            border-right: 1px solid var(--glass-border);
         }
     </style>
 </head>
@@ -95,54 +318,105 @@
     <div class="container">
         <div id="page-courses" class="page active">
             <img src="banner.jpg" id="app-banner" class="banner" alt="All of Naive">
-            <div class="card">
-                <h2>✨ All of Naive</h2>
-                <div class="list-item"><span>⚪️</span><b>База</b> — Всё от скачивания софта до базовых анимаций.</div>
-                <div class="list-item"><span>⚪️</span><b>Разборы Эдитов</b> — пошаговый разбор проектов со всеми фишками.</div>
-                <div class="list-item"><span>⚪️</span><b>Разбор тайтлов</b> — уникальные стили и проекты.</div>
-                <div class="list-item"><span>⚪️</span><b>Моушен сцены</b> — детальный воркшоп.</div>
-                <div class="list-item"><span>⚪️</span><b>Разбор нейронок</b> — интеграция ИИ в монтаж.</div>
-                <div class="list-item"><span>⚪️</span><b>Пак звука / футажей / CRT</b> — приватный пак.</div>
-                <div class="list-item"><span>⚪️</span><b>Комьюнити</b> — закрытый чат и Discord.</div>
-                <div class="price">14 990 RUB</div>
-                <button class="btn" onclick="switchPage('page-pay')">🛍️ Приобрести!</button>
-            </div>
-        </div>
+            
+            <div class="glass-card">
+                <h2>Что тебя ждёт в All of Naive?</h2>
+                <p class="sub-title">Это место, где вы растёте как моушн-дизайнер и получаете всё, чем я пользуюсь сам!</p>
+                
+                <div class="list-item">
+                    <div class="icon">📚</div> <div><b>Туториалы с моим подходом</b> — понятно, без воды и только практика.</div>
+                </div>
+                <div class="list-item">
+                    <div class="icon">🤝</div> <div><b>Поддержка от меня</b> — помощь, ответы и советы по вашим работам.</div>
+                </div>
+                <div class="list-item">
+                    <div class="icon">🎬</div> <div><b>Регулярные разборы</b> ваших работ и обратная связь.</div>
+                </div>
+                <div class="list-item">
+                    <div class="icon">🤌</div> <div><b>Разные фишечки и лайфхаки</b> в After Effects и плагинах.</div>
+                </div>
+                <div class="list-item">
+                    <div class="icon">🦄</div> <div><b>Плагины</b>, которыми я сам пользуюсь + секреты работы с ними.</div>
+                </div>
+                <div class="list-item">
+                    <div class="icon">💎</div> <div><b>AE-файлы, референсы</b>, коллекты и полезные материалы.</div>
+                </div>
+                <div class="list-item">
+                    <div class="icon">🎶</div> <div><b>Музыка и саунды</b> для ваших видео.</div>
+                </div>
+                <div class="list-item">
+                    <div class="icon">🌐</div> <div><b>Полезные сайты</b> и инструменты для работы.</div>
+                </div>
+                <div class="list-item">
+                    <div class="icon">🎁</div> <div><b>Эксклюзивные паки</b> и материалы только для участников.</div>
+                </div>
 
-        <div id="page-pay" class="page">
-            <h2>💳 Выберите способ оплаты</h2>
-            <div class="card" style="text-align: center;">
-                <p>Для пользователей из РФ и СНГ:</p>
-                <button class="btn" style="background: #673ab7; color: white; margin-bottom: 10px;" onclick="pay('yoomoney')">🇷🇺 ЮMoney / Карты РФ</button>
-                <p>Для иностранных пользователей:</p>
-                <button class="btn" style="background: #229ed9; color: white;" onclick="pay('crypto')">🌐 Crypto Bot (Крипта)</button>
+                <div class="price-tag"><span id="main-price-display">2 790</span>₽<span>/ мес</span></div>
+                <button class="btn-primary" onclick="openRates()">🛍️ Приобрести подписку</button>
             </div>
         </div>
 
         <div id="page-profile" class="page">
             <h2>🪪 Личный кабинет</h2>
             <div class="profile-box">
-                • ID: <span id="user-id">Загрузка...</span><br>
-                • Имя: <span id="user-name">Загрузка...</span><br>
-                • Куплено курсов: 0<br>
-                • Язык: RU
+                • <b>Пользователь:</b> <span id="user-name">Загрузка...</span><br>
+                • <b>ID:</b> <span id="user-id">Загрузка...</span><br>
+                • <b>Статус подписки:</b> <span id="sub-status" style="color: #ff3333;">Не активна</span>
             </div>
-            <div class="card">
-                <h3>📥 Последние транзакции</h3>
-                <p style="color: #666; font-size: 14px;">Транзакций пока нет.</p>
+            
+            <div class="glass-card">
+                <h3>📜 О подписке</h3>
+                <p style="color: #aaa; font-size: 14px; line-height: 1.5;">
+                    All of Naive — не просто подписка. После оплаты бот автоматически выдаст тебе персональную инвайт-ссылку в закрытую экосистему.
+                </p>
             </div>
         </div>
     </div>
 
     <div class="tab-bar">
         <div class="tab-item active" id="tab-courses" onclick="switchPage('page-courses')">
-            <div class="tab-icon">✨</div>Курсы
-        </div>
-        <div class="tab-item" id="tab-pay" onclick="switchPage('page-pay')">
-            <div class="tab-icon">💳</div>Оплата
+            <div class="tab-icon">✨</div>
+            Курсы
         </div>
         <div class="tab-item" id="tab-profile" onclick="switchPage('page-profile')">
-            <div class="tab-icon">👤</div>Профиль
+            <div class="tab-icon">👤</div>
+            Профиль
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-overlay" onclick="closeRates()"></div>
+    <div class="bottom-sheet" id="bottom-sheet">
+        <div class="sheet-handle"></div>
+        <h2>Выбор тарифа</h2>
+        <p class="sub-title" style="margin-bottom: 15px;">Выберите период подписки и способ оплаты</p>
+        
+        <div class="tariff-grid">
+            <div class="tariff-card selected" id="tar-1" onclick="selectTariff('1_month')">
+                <div class="tariff-title">1 Месяц</div>
+                <div class="tariff-price"><span id="p-1">2790</span>₽</div>
+            </div>
+            <div class="tariff-card" id="tar-3" onclick="selectTariff('3_months')">
+                <div class="tariff-title">3 Месяца</div>
+                <div class="tariff-price"><span id="p-3">5990</span>₽</div>
+            </div>
+            <div class="tariff-card" id="tar-6" onclick="selectTariff('6_months')">
+                <div class="tariff-title">6 Месяцев</div>
+                <div class="tariff-price"><span id="p-6">9990</span>₽</div>
+            </div>
+            <div class="tariff-card" id="tar-f" onclick="selectTariff('forever')">
+                <div class="tariff-title">Навсегда</div>
+                <div class="tariff-price"><span id="p-f">14990</span>₽</div>
+            </div>
+        </div>
+
+        <div class="promo-container">
+            <input type="text" class="promo-input" id="promo-input" placeholder="Введите промокод (если есть)">
+            <button class="btn-promo" onclick="applyPromo()">Применить</button>
+        </div>
+
+        <div class="pay-methods">
+            <button class="btn-pay btn-yk" onclick="pay('yoomoney')">🇷🇺 Банковская карта РФ / ЮMoney</button>
+            <button class="btn-pay btn-cb" onclick="pay('crypto')">🌐 Криптовалюта (Crypto Bot)</button>
         </div>
     </div>
 
@@ -150,6 +424,27 @@
         const tg = window.Telegram.WebApp;
         tg.expand();
 
+        let selectedTariff = "1_month";
+        let activeDiscount = 0;
+        let appliedPromoCode = "NONE";
+
+        // Парсинг динамических цен из URL, которые передал наш Python-бот из БД!
+        const urlParams = new URLSearchParams(window.location.search);
+        const prices = {
+            "1_month": urlParams.get('p1') || 2790,
+            "3_months": urlParams.get('p3') || 5990,
+            "6_months": urlParams.get('p6') || 9990,
+            "forever": urlParams.get('pf') || 14990
+        };
+
+        // Заполняем цены на экране
+        document.getElementById('main-price-display').innerText = Number(prices["1_month"]).toLocaleString();
+        document.getElementById('p-1').innerText = prices["1_month"];
+        document.getElementById('p-3').innerText = prices["3_months"];
+        document.getElementById('p-6').innerText = prices["6_months"];
+        document.getElementById('p-f').innerText = prices["forever"];
+
+        // Данные юзера из ТГ
         if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
             document.getElementById('user-id').innerText = tg.initDataUnsafe.user.id;
             document.getElementById('user-name').innerText = tg.initDataUnsafe.user.first_name;
@@ -164,12 +459,45 @@
             document.getElementById(tabId).classList.add('active');
         }
 
-        function pay(method) {
+        function openRates() {
+            document.getElementById('modal-overlay').classList.add('active');
+            document.getElementById('bottom-sheet').classList.add('active');
+        }
+
+        function closeRates() {
+            document.getElementById('modal-overlay').classList.remove('active');
+            document.getElementById('bottom-sheet').classList.remove('active');
+        }
+
+        function selectTariff(tariff) {
+            selectedTariff = tariff;
+            document.querySelectorAll('.tariff-card').forEach(card => card.classList.remove('selected'));
+            
+            if(tariff === '1_month') document.getElementById('tar-1').classList.add('selected');
+            if(tariff === '3_months') document.getElementById('tar-3').classList.add('selected');
+            if(tariff === '6_months') document.getElementById('tar-6').classList.add('selected');
+            if(tariff === 'forever') document.getElementById('tar-f').classList.add('selected');
+        }
+
+        function applyPromo() {
+            const code = document.getElementById('promo-input').value.trim().toUpperCase();
+            if (!code) return;
+            
+            // Здесь визуал применения (для точной проверки бот сверит код со своей БД при оплате)
+            appliedPromoCode = code;
             tg.showPopup({
-                title: 'Оплата',
-                message: 'Перенаправляем на защищенный шлюз оплаты...',
+                title: '🎫 Промокод введен',
+                message: `Промокод "${code}" будет применен при генерации счета в боте!`,
                 buttons: [{type: 'ok'}]
             });
+        }
+
+        function pay(method) {
+            // Магия глубоких ссылок (Deep Linking)
+            // Закрываем Mini App и отправляем команду боту в чат в формате: buy_тариф_метод_промокод
+            const deepLink = `https://t.me/AllOfNaive_bot?start=buy_${selectedTariff}_${method}_${appliedPromoCode}`;
+            tg.openTelegramLink(deepLink);
+            tg.close();
         }
     </script>
 </body>
