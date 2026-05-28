@@ -8,17 +8,16 @@
     <style>
         :root {
             --bg-color: #000000;
-            --card-bg: rgba(22, 22, 23, 0.6);
+            --card-bg: rgba(18, 18, 18, 0.6);
             --card-border: rgba(255, 255, 255, 0.08);
             --text-main: #ffffff;
             --text-secondary: #8e8e93;
-            --accent-color: #ffffff;
-            --glass-accent: rgba(255, 255, 255, 0.1);
-            --danger-color: #ff453a;
-            --success-color: #30d158;
+            --accent-glow: rgba(255, 255, 255, 0.06);
+            --white-border: rgba(255, 255, 255, 0.9);
+            --success-color: #ffffff;
         }
 
-        /* Полное скрытие системного скроллбара для предотвращения Layout Shift на ПК */
+        /* Устранение багов скролла и прыжков интерфейса */
         ::-webkit-scrollbar {
             display: none !important;
         }
@@ -35,10 +34,11 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             overflow-y: scroll;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE/Edge */
-            padding-bottom: 90px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding-bottom: 100px;
             padding-top: env(safe-area-inset-top);
+            background-image: radial-gradient(circle at 50% -20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
         }
 
         .container {
@@ -47,14 +47,14 @@
             margin: 0 auto;
         }
 
-        /* Баннер */
+        /* Премиальный баннер с мягким белым свечением */
         .banner {
             width: 100%;
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             border: 1px solid var(--card-border);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 30px var(--accent-glow);
         }
 
         .banner img {
@@ -62,48 +62,48 @@
             display: block;
         }
 
-        /* Вкладки навигации (Главный экран) */
         .page {
             display: none;
         }
 
         .page.active {
             display: block;
-            animation: fadeIn 0.3s ease-in-out;
+            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Карточка курса */
+        /* Карточки в стиле матового стекла */
         .course-card {
             background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             border: 1px solid var(--card-border);
-            border-radius: 24px;
+            border-radius: 28px;
             padding: 24px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
         }
 
         .course-title {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 700;
             letter-spacing: -0.5px;
-            margin-bottom: 18px;
+            margin-bottom: 22px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
-        /* Стилизация под кастомные стикеры из паков */
         .sticker-icon {
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             vertical-align: middle;
             display: inline-block;
+            flex-shrink: 0;
         }
 
         .features-list {
@@ -111,24 +111,13 @@
         }
 
         .features-list li {
-            font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 14px;
-            color: #efefef;
-            display: table;
-            width: 100%;
-        }
-
-        .feature-icon-cell {
-            display: table-cell;
-            width: 36px;
-            vertical-align: top;
-            padding-top: 2px;
-        }
-
-        .feature-text-cell {
-            display: table-cell;
-            vertical-align: top;
+            font-size: 14.5px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            color: #d1d1d6;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
         }
 
         .feature-text-cell strong {
@@ -136,14 +125,14 @@
             font-weight: 600;
         }
 
-        /* Главная кнопка действия */
+        /* Кнопка "Приобрести" */
         .btn-primary {
             background: #ffffff;
             color: #000000;
             border: none;
             width: 100%;
-            padding: 16px;
-            border-radius: 16px;
+            padding: 18px;
+            border-radius: 20px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
@@ -151,38 +140,39 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
-            margin-top: 10px;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 25px rgba(255, 255, 255, 0.12);
+            margin-top: 12px;
         }
 
         .btn-primary:active {
-            transform: scale(0.98);
-            opacity: 0.9;
+            transform: scale(0.97);
+            background: #e5e5ea;
         }
 
-        /* Профиль / Личный кабинет */
+        /* Профиль */
         .profile-box {
             background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             border: 1px solid var(--card-border);
-            border-radius: 24px;
-            padding: 24px;
+            border-radius: 28px;
+            padding: 32px 24px;
             text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
 
         .avatar-container {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
-            background: var(--glass-accent);
-            margin: 0 auto 16px;
+            background: rgba(255, 255, 255, 0.05);
+            margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            border: 2px solid var(--card-border);
+            border: 1px solid var(--card-border);
         }
 
         .avatar-container img {
@@ -192,46 +182,44 @@
         }
 
         .user-name {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
         }
 
         .sub-status {
             display: inline-block;
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 10px 20px;
+            border-radius: 22px;
             font-size: 14px;
             font-weight: 500;
-            margin-top: 12px;
+            margin-top: 8px;
         }
 
         .sub-status.active {
-            background: rgba(48, 209, 88, 0.15);
-            color: var(--success-color);
-            border: 1px solid rgba(48, 209, 88, 0.25);
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         .sub-status.inactive {
-            background: rgba(255, 69, 58, 0.15);
-            color: var(--danger-color);
-            border: 1px solid rgba(255, 69, 58, 0.25);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-secondary);
+            border: 1px solid var(--card-border);
         }
 
-        /* Внутреннее окно выбора тарифов (iOS Drawer) */
+        /* Шторка iOS с мягким лаконичным белым свечением */
         .drawer-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             z-index: 1000;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .drawer-overlay.open {
@@ -241,48 +229,44 @@
 
         .drawer {
             position: fixed;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #121214;
-            border-top: 1px solid var(--card-border);
-            border-radius: 24px 24px 0 0;
-            padding: 24px 24px calc(24px + env(safe-area-inset-bottom)) 24px;
+            left: 0; right: 0; bottom: 0;
+            background: #0d0d0e;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 32px 32px 0 0;
+            padding: 24px 24px calc(30px + env(safe-area-inset-bottom)) 24px;
             transform: translateY(100%);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             z-index: 1001;
             max-height: 85vh;
             overflow-y: auto;
+            box-shadow: 0 -10px 40px rgba(255, 255, 255, 0.02);
         }
 
         .drawer-overlay.open .drawer {
             transform: translateY(0);
         }
 
-        /* Заголовок шторки с крестиком закрытия вместо полоски */
         .drawer-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            position: relative;
+            margin-bottom: 24px;
         }
 
         .drawer-title {
-            font-size: 18px;
+            font-size: 19px;
             font-weight: 600;
-            color: #ffffff;
+            letter-spacing: -0.2px;
         }
 
         .drawer-close {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.06);
             color: #ffffff;
             border: none;
-            width: 30px;
-            height: 30px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            font-size: 18px;
-            font-weight: 400;
+            font-size: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -290,36 +274,18 @@
             transition: background 0.2s;
         }
 
-        .drawer-close:active {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Стилизация промокода */
-        .promo-container {
-            margin-bottom: 20px;
-        }
-
         .promo-input {
             width: 100%;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--card-border);
-            padding: 14px 16px;
-            border-radius: 12px;
+            padding: 16px;
+            border-radius: 14px;
             color: #ffffff;
             font-size: 15px;
             outline: none;
-            transition: border-color 0.2s;
+            margin-bottom: 20px;
         }
 
-        .promo-input:focus {
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .promo-input::placeholder {
-            color: var(--text-secondary);
-        }
-
-        /* Сетка тарифов */
         .tariff-options {
             display: flex;
             flex-direction: column;
@@ -328,10 +294,10 @@
         }
 
         .tariff-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 16px;
+            border-radius: 18px;
+            padding: 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -339,9 +305,10 @@
             transition: all 0.2s ease;
         }
 
-        .tariff-card:active, .tariff-card.selected {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.3);
+        .tariff-card.selected {
+            background: rgba(255, 255, 255, 0.06) !important;
+            border: 2px solid #ffffff !important;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.08) !important;
         }
 
         .tariff-info {
@@ -361,22 +328,21 @@
         }
 
         .tariff-price {
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 700;
-            color: #ffffff;
         }
 
-        /* Кнопки методов оплаты */
         .pay-methods {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 14px;
+            margin-bottom: 20px;
         }
 
         .btn-pay {
-            padding: 14px;
-            border-radius: 14px;
-            font-size: 14px;
+            padding: 16px;
+            border-radius: 16px;
+            font-size: 15px;
             font-weight: 600;
             border: none;
             cursor: pointer;
@@ -393,28 +359,63 @@
         }
 
         .btn-pay.cryptobot {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.06);
             color: #ffffff;
             border: 1px solid var(--card-border);
         }
 
-        .btn-pay:active {
-            transform: scale(0.97);
+        /* Блок юридических ссылок */
+        .legal-notice {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-align: center;
+            line-height: 1.5;
+            padding: 0 5px;
         }
 
-        /* Таббар (Нижняя навигация) */
+        .legal-link {
+            color: #ffffff;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        /* Полноэкранное окно Соглашения (Оферта + 152-ФЗ) */
+        .offer-modal {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #000000;
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+            padding: 24px;
+            padding-top: env(safe-area-inset-top);
+        }
+
+        .offer-content {
+            overflow-y: auto;
+            flex: 1;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #d1d1d6;
+            margin-bottom: 20px;
+            padding-right: 4px;
+        }
+
+        .offer-content h2 { color: #fff; margin-bottom: 16px; font-size: 18px; text-transform: uppercase; border-bottom: 1px solid var(--card-border); padding-bottom: 8px; }
+        .offer-content h3 { color: #fff; margin-top: 20px; margin-bottom: 8px; font-size: 14px; font-weight: 600; }
+        .offer-content p { margin-bottom: 12px; }
+
+        /* Нижний таббар */
         .tabbar {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(18, 18, 20, 0.8);
+            bottom: 0; left: 0; right: 0;
+            background: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(30px);
             -webkit-backdrop-filter: blur(30px);
             border-top: 1px solid var(--card-border);
             display: flex;
             justify-content: space-around;
-            padding: 8px 0 calc(8px + env(safe-area-inset-bottom)) 0;
+            padding: 10px 0 calc(10px + env(safe-area-inset-bottom)) 0;
             z-index: 900;
         }
 
@@ -422,14 +423,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
             color: var(--text-secondary);
             background: none;
             border: none;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 500;
             cursor: pointer;
-            width: 60px;
+            width: 70px;
             transition: color 0.2s;
         }
 
@@ -437,179 +438,162 @@
             color: var(--text-main);
         }
 
-        .tab-item .sticker-icon {
-            opacity: 0.6;
-            transition: opacity 0.2s;
+        .tab-item svg path {
+            fill: var(--text-secondary);
+            transition: fill 0.2s;
         }
 
-        .tab-item.active .sticker-icon {
-            opacity: 1;
+        .tab-item.active svg path {
+            fill: #ffffff;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Шапка-Баннер -->
         <div class="banner">
-            <img src="https://naivee444.github.io/naive-app/banner.png" alt="All of Naive Banner" onerror="this.src='https://placehold.co/600x250/161617/ffffff?text=ALL+OF+NAIVE'">
+            <img src="https://naivee444.github.io/naive-app/banner.png" alt="All of Naive" onerror="this.src='https://placehold.co/600x250/121212/ffffff?text=ALL+OF+NAIVE'">
         </div>
 
-        <!-- СТРАНИЦА: КУРСЫ -->
         <div id="page-courses" class="page active">
             <div class="course-card">
                 <div class="course-title">
-                    <!-- Стикер Микки (Звездный/Премиальный концепт из пака) -->
-                    <svg class="sticker-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18 2L22.5 13.5L34 14L25 22L28 34L18 27.5L8 34L11 22L2 14L13.5 13.5L18 2Z" fill="#FFD700"/>
-                        <circle cx="10" cy="14" r="3" fill="#ffffff" opacity="0.4"/>
+                    <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L14.85 9.15L22 12L14.85 14.85L12 22L9.15 14.85L2 12L9.15 9.15L12 2Z" fill="#ffffff"/>
                     </svg>
                     <span>All of Naive</span>
                 </div>
                 
                 <ul class="features-list">
                     <li>
-                        <div class="feature-icon-cell">
-                            <!-- Стикер из TgAndroidIcons (Иконка Папки/Базы) -->
-                            <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V8C22 6.9 21.1 6 20 6H12L10 4Z" fill="#3A86FF"/></svg>
-                        </div>
+                        <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM12 6C13.66 6 15 7.34 15 9C15 10.66 13.66 12 12 12C10.34 12 9 10.66 9 9C9 7.34 10.34 6 12 6ZM18 18H6V16.5C6 14.5 10 13.4 12 13.4C14 13.4 18 14.5 18 16.5V18Z" fill="#ffffff" opacity="0.9"/></svg>
                         <div class="feature-text-cell"><strong>База</strong> — Всё от скачивания софта до базовых анимаций.</div>
                     </li>
                     <li>
-                        <div class="feature-icon-cell">
-                            <!-- Стикер из Fintopio (Кристалл/Разборы Эдитов) -->
-                            <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 12L12 22L22 12L12 2Z" fill="#00C49F"/></svg>
-                        </div>
-                        <div class="feature-text-cell"><strong>Разборы Эдитов</strong> — пошаговый разбор проектов со всеми фишками.</div>
+                        <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6H20V8H4V6ZM4 11H20V13H4V11ZM4 16H15V18H4V16Z" fill="#ffffff" opacity="0.9"/></svg>
+                        <div class="feature-text-cell"><strong>Разборы Эдитов</strong> — Пошаговый разбор проектов со всеми фишками.</div>
                     </li>
                     <li>
-                        <div class="feature-icon-cell">
-                            <!-- Стикер Текст/Тайтлы -->
-                            <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 9H20V11H4V9ZM4 13H14V15H4V13Z" fill="#FF007A" stroke="#FF007A" stroke-width="2" stroke-linecap="round"/></svg>
-                        </div>
-                        <div class="feature-text-cell"><strong>Разбор тайтлов</strong> — уникальные стили и проекты.</div>
+                        <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 22H22L12 2ZM12 6L18.8 18H5.2L12 6Z" fill="#ffffff" opacity="0.9"/></svg>
+                        <div class="feature-text-cell"><strong>Разбор тайтлов</strong> — Уникальные стили и проекты.</div>
                     </li>
                     <li>
-                        <div class="feature-icon-cell">
-                            <!-- Кинолента / Моушен сцены -->
-                            <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 4V6H16V4H8V6H6V4H4V20H6V18H8V20H16V18H18V20H20V4H18ZM8 15H16V9H8V15Z" fill="#FFBE0B"/></svg>
-                        </div>
-                        <div class="feature-text-cell"><strong>Моушен сцены</strong> — детальный воркшоп.</div>
+                        <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 3H3C1.9 3 1 3.9 1 4.9V19C1 20.1 1.9 21 3 21H21C22.1 21 23 20.1 23 19V4.9C23 3.9 22.1 3 21 3ZM21 17H3V7H21V17Z" fill="#ffffff" opacity="0.9"/></svg>
+                        <div class="feature-text-cell"><strong>Моушен сцены</strong> — Детальный воркшоп.</div>
                     </li>
                     <li>
-                        <div class="feature-icon-cell">
-                            <!-- ИИ / Нейронки из FintopioBOT трендов -->
-                            <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L14.85 9.15L22 12L14.85 14.85L12 22L9.15 14.85L2 12L9.15 9.15L12 2Z" fill="#8338EC"/></svg>
-                        </div>
-                        <div class="feature-text-cell"><strong>Разбор нейронок</strong> — интеграция ИИ в монтаж.</div>
+                        <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z" fill="#ffffff" opacity="0.9"/></svg>
+                        <div class="feature-text-cell"><strong>Разбор нейронок</strong> — Интеграция ИИ в монтаж.</div>
                     </li>
                     <li>
-                        <div class="feature-icon-cell">
-                            <!-- Пакет ресурсов -->
-                            <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 6H4V4H20V6ZM21 12V10H3V12H21ZM20 16H4V14H20V16ZM18 20H6V18H18V20Z" fill="#FB5607"/></svg>
-                        </div>
-                        <div class="feature-text-cell"><strong>Пак звука / футажей / CRT</strong> — приватный пак.</div>
+                        <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" fill="#ffffff" opacity="0.9"/></svg>
+                        <div class="feature-text-cell"><strong>Пак звука / футажей / CRT</strong> — Приватный авторский пак.</div>
                     </li>
                     <li>
-                        <div class="feature-icon-cell">
-                            <!-- Комьюнити / Дискорд -->
-                            <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" fill="#06D6A0"/></svg>
-                        </div>
-                        <div class="feature-text-cell"><strong>Комьюнити</strong> — закрытый чат и Discord.</div>
+                        <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z" fill="#ffffff" opacity="0.9"/></svg>
+                        <div class="feature-text-cell"><strong>Комьюнити</strong> — Закрытый чат и личный Discord.</div>
                     </li>
                 </ul>
-                
-                <!-- Цена снизу удалена по фидбеку заказчика -->
 
                 <button class="btn-primary" onclick="toggleDrawer(true)">
-                    <!-- Кастомная корзинка/сумка из стикер пака -->
-                    <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19 7H16V6C16 4.34 14.66 3 13 3H11C9.34 3 8 4.34 8 6V7H5C3.9 7 3 7.9 3 9V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V9C21 7.9 20.1 7.7 19 7ZM10 6C10 5.45 10.45 5 11 5H13C13.55 5 14 5.45 14 6V7H10V6ZM19 19H5V9H19V19Z" fill="#000000"/>
-                    </svg>
+                    <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 7H16V6C16 4.34 14.66 3 13 3H11C9.34 3 8 4.34 8 6V7H5C3.9 7 3 7.9 3 9V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V9C21 7.9 20.1 7 19 7ZM10 6C10 5.45 10.45 5 11 5H13C13.55 5 14 5.45 14 6V7H10V6Z" fill="#000000"/></svg>
                     <span>Приобрести подписку</span>
                 </button>
             </div>
         </div>
 
-        <!-- СТРАНИЦА: ПРОФИЛЬ -->
         <div id="page-profile" class="page">
             <div class="profile-box">
                 <div class="avatar-container" id="user-avatar">
-                    <!-- Заглушка, если нет фото -->
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5-4-8-4z" fill="#ffffff" opacity="0.5"/></svg>
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5-4-8-4z" fill="#ffffff" opacity="0.3"/></svg>
                 </div>
-                <div class="user-name" id="user-name">Пользователь</div>
-                <div id="sub-status-box" class="sub-status inactive">Загрузка данных...</div>
+                <div class="user-name" id="user-name">Загрузка...</div>
+                <div id="sub-status-box" class="sub-status inactive">Проверка подписки...</div>
             </div>
         </div>
     </div>
 
-    <!-- ШТОРКА ТАРИФОВ (iOS DRAWER) -->
     <div class="drawer-overlay" id="drawer-overlay" onclick="if(event.target===this) toggleDrawer(false)">
         <div class="drawer">
             <div class="drawer-header">
                 <span class="drawer-title">Выберите период подписки</span>
-                <!-- Кнопка Крестик справа сверху вместо серой полоски -->
                 <button class="drawer-close" onclick="toggleDrawer(false)">&times;</button>
             </div>
 
-            <!-- Промокод с маленькими буквами в placeholder -->
-            <div class="promo-container">
-                <input type="text" id="promo-code" class="promo-input" placeholder="Промокод">
-            </div>
+            <input type="text" id="promo-code" class="promo-input" placeholder="Промокод">
 
             <div class="tariff-options">
                 <div class="tariff-card selected" onclick="selectTariff(this, '1_month', 2790)">
                     <div class="tariff-info">
                         <span class="tariff-name">1 месяц</span>
-                        <span class="tariff-desc">Быстрый старт в All of Naive</span>
+                        <span class="tariff-desc">Быстрый доступ к материалам</span>
                     </div>
                     <span class="tariff-price">2 790 ₽</span>
                 </div>
                 <div class="tariff-card" onclick="selectTariff(this, '3_months', 6990)">
                     <div class="tariff-info">
                         <span class="tariff-name">3 месяца</span>
-                        <span class="tariff-desc">Оптимальный выбор для практики</span>
+                        <span class="tariff-desc">Оптимально для закрепления базы</span>
                     </div>
                     <span class="tariff-price">6 990 ₽</span>
                 </div>
                 <div class="tariff-card" onclick="selectTariff(this, '6_months', 11990)">
                     <div class="tariff-info">
                         <span class="tariff-name">6 месяцев</span>
-                        <span class="tariff-desc">Профессиональный уровень</span>
+                        <span class="tariff-desc">Максимальный упор на практику</span>
                     </div>
                     <span class="tariff-price">11 990 ₽</span>
                 </div>
                 <div class="tariff-card" onclick="selectTariff(this, 'forever', 14990)">
                     <div class="tariff-info">
                         <span class="tariff-name">Навсегда</span>
-                        <span class="tariff-desc">Пожизненный доступ ко всему</span>
+                        <span class="tariff-desc">Пожизненный доступ ко всем апдейтам</span>
                     </div>
                     <span class="tariff-price">14 990 ₽</span>
                 </div>
             </div>
 
             <div class="pay-methods">
-                <button class="btn-pay yoomoney" onclick="processPayment('yoomoney')">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5Z" fill="#000000"/></svg>
-                    <span>ЮMoney</span>
-                </button>
-                <button class="btn-pay cryptobot" onclick="processPayment('crypto')">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z" stroke="#ffffff" stroke-width="2"/><path d="M7 10h10M7 14h10M12 7v10" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/></svg>
-                    <span>Crypto Bot</span>
-                </button>
+                <button class="btn-pay yoomoney" onclick="processPayment('yoomoney')">ЮMoney</button>
+                <button class="btn-pay cryptobot" onclick="processPayment('crypto')">Crypto Bot</button>
+            </div>
+
+            <div class="legal-notice">
+                Совершая оплату, вы безоговорочно принимаете условия <span class="legal-link" onclick="openOffer()">Пользовательского соглашения и Политики конфиденциальности</span>.
             </div>
         </div>
     </div>
 
-    <!-- ТАББАР НАВИГАЦИИ -->
+    <div class="offer-modal" id="offer-modal">
+        <div class="offer-content">
+            <h2>ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ</h2>
+            <p><strong>Редакция от: Май 2026 г.</strong></p>
+            <p>Настоящий документ объединяет в себе Публичную оферту на предоставление доступа к цифровому контенту и Политику конфиденциальности в соответствии с требованиями Федерального закона РФ № 152-ФЗ «О персональных данных».</p>
+            
+            <h3>ЧАСТЬ 1. ПУБЛИЧНАЯ ОФЕРТА</h3>
+            <p><strong>1. Предмет договора:</strong> Исполнитель предоставляет Пользователю платный доступ к закрытым информационно-обучающим материалам по видеомонтажу (видеоуроки, исходники, авторские паки звуков/эффектов) через Telegram Mini App.</p>
+            <p><strong>2. Порядок предоставления и отсутствие возвратов:</strong> Весь цифровой контент и учебные проекты предоставляются Пользователю в состоянии <strong>«КАК ЕСТЬ» (As is)</strong>. Доступ открывается мгновенно в автоматическом режиме сразу после подтверждения успешного платежа через шлюз ЮKassa или Crypto Bot.</p>
+            <p>В силу того, что продукт является непериодическим цифровым изданием, доступ к которому предоставляется в полном объеме сразу, <strong>ВОЗВРАТ ДЕНЕЖНЫХ СРЕДСТВ ПОСЛЕ ОПЛАТЫ НЕ ПРОИЗВОДИТСЯ</strong>. Отсутствие ожидаемого Пользователем субъективного результата не является основанием для возврата.</p>
+            
+            <h3>ЧАСТЬ 2. ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ (152-ФЗ)</h3>
+            <p><strong>1. Какие данные обрабатываются:</strong> При использовании настоящего приложения Исполнитель получает доступ к публичным техническим данным профиля Telegram Пользователя: уникальный Telegram ID, Имя, Фамилия, а также URL-ссылка на аватар профиля.</p>
+            <p><strong>2. Цель обработки данных:</strong> Персональные данные обрабатываются исключительно в целях идентификации Пользователя в системе, привязки приобретенного тарифного плана к его аккаунту и автоматической проверки срока действия активной подписки.</p>
+            <p><strong>3. Защита и передача третьим лицам:</strong> Исполнитель обязуется не передавать данные Пользователя третьим лицам, за исключением случаев автоматической передачи зашифрованных платежных логов на стороне серверов ЮKassa/Crypto Bot для процессинга транзакции. Данные хранятся в защищенной базе данных и удаляются по первому требованию Пользователя при обращении в поддержку.</p>
+        </div>
+        <button class="btn-primary" onclick="closeOffer()" style="margin-top: 0;">Понятно, закрыть</button>
+    </div>
+
     <div class="tabbar">
         <button class="tab-item active" onclick="switchPage('courses', this)">
-            <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3L1 9L12 15L21 10V17H23V9L12 3Z" fill="#ffffff"/><path d="M5 13.18V17.18L12 21L19 17.18V13.18L12 17L5 13.18Z" fill="#ffffff" opacity="0.7"/></svg>
-            <span>Курсы</span>
+            <svg class="sticker-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="#8e8e93"/>
+            </svg>
+            <span>Подписка</span>
         </button>
         <button class="tab-item" onclick="switchPage('profile', this)">
-            <svg class="sticker-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 6C13.66 6 15 7.34 15 9C15 10.66 13.66 12 12 12C10.34 12 9 10.66 9 9C9 7.34 10.34 6 12 6ZM12 20.2C9.3 20.2 6.97 18.82 5.66 16.74C5.69 14.65 9.8C13.5 12 13.5C14.2 13.5 18.31 14.65 18.34 16.74C17.03 18.82 14.7 20.2 12 20.2Z" fill="#ffffff"/></svg>
+            <svg class="sticker-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" fill="#8e8e93"/>
+            </svg>
             <span>Профиль</span>
         </button>
     </div>
@@ -622,7 +606,6 @@
         let selectedTariffId = '1_month';
         let selectedTariffPrice = 2790;
 
-        // Настройка аватарки и имени пользователя из Telegram API
         if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
             const user = tg.initDataUnsafe.user;
             document.getElementById('user-name').innerText = (user.first_name + ' ' + (user.last_name || '')).trim();
@@ -631,13 +614,10 @@
             }
         }
 
-        // Запрос статуса подписки с бэкенда через стартовые параметры (или имитация)
         function checkSubscriptionStatus() {
             const statusBox = document.getElementById('sub-status-box');
-            
-            // Считываем параметры ссылки (если бот передал инфо о подписке)
             const urlParams = new URLSearchParams(window.location.search);
-            const subUntil = urlParams.get('sub_until'); // Ожидаем timestamp или форматированную строку
+            const subUntil = urlParams.get('sub_until');
 
             if (subUntil && subUntil !== 'none' && subUntil !== '0') {
                 statusBox.className = "sub-status active";
@@ -653,18 +633,14 @@
         function switchPage(pageId, button) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.tab-item').forEach(b => b.classList.remove('active'));
-            
             document.getElementById(`page-${pageId}`).classList.add('active');
             button.classList.add('active');
         }
 
         function toggleDrawer(show) {
             const overlay = document.getElementById('drawer-overlay');
-            if (show) {
-                overlay.classList.add('open');
-            } else {
-                overlay.classList.remove('open');
-            }
+            if (show) overlay.classList.add('open');
+            else overlay.classList.remove('open');
         }
 
         function selectTariff(element, tariffId, price) {
@@ -674,15 +650,19 @@
             selectedTariffPrice = price;
         }
 
-        // Исправленная и надежная функция отправки данных боту, которая исключает сбои парсинга
         function processPayment(method) {
             const promo = document.getElementById('promo-code').value.trim() || "none";
-            
-            // Формируем чистую стандартизированную строку данных: "action:метод:тариф:промо"
             const dataString = `pay:${method}:${selectedTariffId}:${promo}`;
-            
             tg.sendData(dataString);
             tg.close();
+        }
+
+        function openOffer() {
+            document.getElementById('offer-modal').style.display = 'flex';
+        }
+
+        function closeOffer() {
+            document.getElementById('offer-modal').style.display = 'none';
         }
     </script>
 </body>
